@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XSPLC9L2CX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XSPLC9L2CX');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags (will be dynamically updated by JavaScript) -->
+    <title id="pageTitle">AI Image Prompt Details | REDDY FOR AI</title>
+    <meta name="title" content="AI Image Prompt Details | REDDY FOR AI">
+    <meta name="description" id="pageDescription" content="View and copy this AI image prompt. Use it with Midjourney, DALL-E, Stable Diffusion, or any AI image generator to create stunning artwork.">
+    <meta name="keywords" content="AI prompt, image generation, Midjourney prompt, DALL-E prompt, AI art">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook (will be dynamically updated) -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://reddyforai.com/promptdetails.html">
+    <meta property="og:title" id="ogTitle" content="AI Image Prompt | REDDY FOR AI">
+    <meta property="og:description" id="ogDescription" content="View and copy this AI image prompt for creating stunning AI-generated artwork.">
+    <meta property="og:image" id="ogImage" content="https://reddyforai.com/og-image.jpg">
+    <meta property="og:site_name" content="REDDY FOR AI">
+    
+    <!-- Twitter (will be dynamically updated) -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" id="twitterTitle" content="AI Image Prompt | REDDY FOR AI">
+    <meta property="twitter:description" id="twitterDescription" content="View and copy this AI image prompt for creating stunning AI-generated artwork.">
+    <meta property="twitter:image" id="twitterImage" content="https://reddyforai.com/twitter-image.jpg">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles-detail.css">
+    
+    <!-- Breadcrumb Schema (will be dynamically updated) -->
+    <script type="application/ld+json" id="breadcrumbSchema">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://reddyforai.com/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Explore",
+        "item": "https://reddyforai.com/ai-image-prompts.html"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Prompt Details",
+        "item": "https://reddyforai.com/promptdetails.html"
+      }]
+    }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Header with Integrated Navigation -->
+    <header class="header" role="banner">
+        <div class="container-full">
+            <a href="index.html" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="ai-image-prompts.html">EXPLORE</a></li>
+                    <li><a href="submit.html">SUBMIT</a></li>
+                    <li><a href="About.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumb-container">
+        <div class="container-full">
+            <nav aria-label="Breadcrumb" class="breadcrumb" id="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="ai-image-prompts.html">All Prompts</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current" id="breadcrumbTitle">Loading...</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Back and Share Buttons -->
+            <div class="detail-header">
+                <button class="back-btn" onclick="window.history.back()">← Back</button>
+                <button class="share-btn" id="shareBtn">Share</button>
+            </div>
+
+            <!-- Detail Content -->
+            <div class="detail-main">
+                <!-- Image Section -->
+                <div class="detail-image-section">
+                    <img id="promptImage" src="" alt="" class="detail-image">
+                </div>
+
+                <!-- Info Section -->
+                <div class="detail-info-section">
+                    <h1 id="promptTitle" class="detail-title">Loading...</h1>
+
+                    <div class="detail-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Model:</span>
+                            <span id="promptModel" class="meta-value">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Creator:</span>
+                            <span id="promptCreator" class="meta-value">-</span>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="detail-prompt-box">
+                        <h3>Prompt:</h3>
+                        <p id="promptText" class="prompt-text">Loading...</p>
+                        <button class="copy-btn-large" id="copyBtn">Copy Prompt</button>
+                    </div>
+
+                    <div id="notesContainer" class="detail-notes" style="display: none;">
+                        <h3>Notes:</h3>
+                        <p id="promptNotes"></p>
+                    </div>
+
+                    <button class="save-btn-large" id="saveBtn">Save Prompt</button>
+                    <div id="tagsContainer" class="detail-tags" style="display: none;">
+                        <!-- Tags will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Like This Section -->
+            <div class="related-section">
+                <h2>More like this</h2>
+                <div id="relatedGrid" class="related-grid">
+                    <!-- Related images will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About Column -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">REDDY FOR AI</h3>
+                    <p class="footer-description">Your go-to library for trending AI image prompts. Discover, copy, and create stunning AI-generated artwork.</p>
+                </div>
+                
+                <!-- Quick Links Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ai-image-prompts.html">AI Image Prompts</a></li>
+                        <li><a href="submit.html">Submit Prompt</a></li>
+                        <li><a href="About.html">About</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-list">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social & Contact Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
+                            <span class="social-icon">in</span> LinkedIn
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link">
+                            <span class="social-icon">𝕏</span> Twitter
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                            <span class="social-icon">ig</span> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 REDDY FOR AI. All rights reserved. Made with AI for AI creators.</p>
+                <p style="font-size: 11px; opacity: 0.7; margin-top: 8px;">Empowering creativity through AI prompt engineering</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js?v=3"></script>
+    <script src="promptdetails.js?v=3"></script>
+    <script>
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

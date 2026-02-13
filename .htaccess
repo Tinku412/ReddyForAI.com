@@ -1,0 +1,164 @@
+# Apache .htaccess Configuration for Clean URLs
+# REDDY FOR AI - SEO-Friendly URL Routing
+
+# Enable RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # ======================================
+    # 1. FORCE HTTPS (Uncomment if using SSL)
+    # ======================================
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # ======================================
+    # 2. REMOVE WWW (Uncomment to enforce non-www)
+    # ======================================
+    # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # ======================================
+    # 3. REMOVE TRAILING SLASHES (except for directories)
+    # ======================================
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+    # ======================================
+    # 4. REMOVE index.html FROM URLs
+    # ======================================
+    # Redirect index.html to root
+    RewriteCond %{THE_REQUEST} ^.*/index\.html
+    RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
+
+    # ======================================
+    # 5. REMOVE .html EXTENSION FROM ALL PAGES
+    # ======================================
+    # Redirect .html files to extensionless URLs
+    RewriteCond %{THE_REQUEST} ^GET\ /(.*)\.html\ HTTP
+    RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+    # ======================================
+    # 6. HANDLE EXTENSIONLESS URLs (Add .html internally)
+    # ======================================
+    # If the file doesn't exist and it's not a directory
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Check if .html file exists
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    # Serve the .html file
+    RewriteRule ^(.*)$ $1.html [L]
+
+    # ======================================
+    # 7. HANDLE /prompt/ PATH-BASED ROUTING
+    # ======================================
+    # Redirect all /prompt/* URLs to /prompt/index.html for client-side routing
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^prompt/(.+)$ /prompt/index.html [L,QSA]
+
+    # ======================================
+    # 8. HANDLE ROOT INDEX
+    # ======================================
+    # Serve index.html when accessing root
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^$ /index.html [L]
+
+</IfModule>
+
+# ======================================
+# CUSTOM ERROR PAGES
+# ======================================
+ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html
+
+# ======================================
+# SECURITY HEADERS
+# ======================================
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # XSS Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ======================================
+# COMPRESSION
+# ======================================
+<IfModule mod_deflate.c>
+    # Compress HTML, CSS, JavaScript, Text, XML
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/json application/xml text/xml
+</IfModule>
+
+# ======================================
+# BROWSER CACHING
+# ======================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # CSS and JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # Fonts
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    
+    # HTML
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ======================================
+# MIME TYPES
+# ======================================
+<IfModule mod_mime.c>
+    # JavaScript
+    AddType application/javascript js
+    
+    # Fonts
+    AddType font/woff woff
+    AddType font/woff2 woff2
+    AddType application/font-woff woff
+    AddType application/font-woff2 woff2
+    
+    # Images
+    AddType image/webp webp
+    AddType image/svg+xml svg
+</IfModule>
+
+# ======================================
+# PREVENT DIRECTORY BROWSING
+# ======================================
+Options -Indexes
+
+# ======================================
+# PROTECT SENSITIVE FILES
+# ======================================
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|env)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

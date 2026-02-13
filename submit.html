@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XSPLC9L2CX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XSPLC9L2CX');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Submit Your AI Image Prompt | Share Your AI Art With The Community | REDDY FOR AI</title>
+    <meta name="title" content="Submit Your AI Image Prompt | Share Your AI Art | REDDY FOR AI">
+    <meta name="description" content="Share your AI image prompts with the community. Submit your Midjourney, DALL-E, or Stable Diffusion prompts and help other creators discover new ways to generate stunning AI art.">
+    <meta name="keywords" content="submit AI prompt, share AI art, contribute prompts, AI community, prompt submission">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://reddyforai.com/submit">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://reddyforai.com/submit">
+    <meta property="og:title" content="Submit Your AI Image Prompt | REDDY FOR AI">
+    <meta property="og:description" content="Share your AI image prompts with the community and help other creators.">
+    <meta property="og:image" content="https://reddyforai.com/og-image.jpg">
+    <meta property="og:site_name" content="REDDY FOR AI">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://reddyforai.com/submit">
+    <meta property="twitter:title" content="Submit Your AI Image Prompt | REDDY FOR AI">
+    <meta property="twitter:description" content="Share your AI image prompts with the community and help other creators.">
+    <meta property="twitter:image" content="https://reddyforai.com/twitter-image.jpg">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="submit-styles.css">
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://reddyforai.com/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Submit",
+        "item": "https://reddyforai.com/submit.html"
+      }]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header with Integrated Navigation -->
+    <header class="header" role="banner">
+        <div class="container-full">
+            <a href="index.html" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="ai-image-prompts.html">EXPLORE</a></li>
+                    <li><a href="submit.html" class="active">SUBMIT</a></li>
+                    <li><a href="About.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumb-container">
+        <div class="container-full">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Submit</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="submit-container">
+                <h2 class="submit-title">Share your prompts with the community</h2>
+                <!-- <p class="submit-description">Share your AI prompts with the community</p> -->
+
+                <form id="submitForm" class="submit-form">
+                    <!-- Prompt Text -->
+                    <div class="form-group">
+                        <label for="prompt">PROMPT</label>
+                        <textarea 
+                            id="prompt" 
+                            name="prompt" 
+                            rows="5" 
+                            placeholder="Enter your prompt here..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form-group">
+                        <label for="title">TITLE (MAX 100 CHARACTERS)</label>
+                        <input 
+                            type="text" 
+                            id="title" 
+                            name="title" 
+                            maxlength="100"
+                            placeholder="Give your prompt a descriptive title"
+                        >
+                        <span class="char-count"><span id="titleCount">0</span>/100</span>
+                    </div>
+
+                    <!-- Model Name -->
+                    <div class="form-group">
+                        <label for="modelName">MODEL NAME</label>
+                        <select id="modelName" name="modelName">
+                            <option value="">Select a model</option>
+                            <option value="Gemini">Gemini</option>
+                            <option value="ChatGPT">ChatGPT</option>
+                            <option value="Midjourney">Midjourney</option>
+                            <option value="Stable Diffusion">Stable Diffusion</option>
+                            <option value="Runway">Runway</option>
+                            <option value="DALL-E">DALL-E</option>
+                            <option value="Claude">Claude</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Creator Name -->
+                    <div class="form-group">
+                        <label for="creator">CREATOR NAME</label>
+                        <input 
+                            type="text" 
+                            id="creator" 
+                            name="creator" 
+                            placeholder="Your name or handle"
+                        >
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        <label for="imageUpload">EXAMPLE IMAGE</label>
+                        <div class="upload-area" id="uploadArea">
+                            <input 
+                                type="file" 
+                                id="imageUpload" 
+                                name="imageUpload" 
+                                accept="image/*"
+                                style="display: none;"
+                            >
+                            <div class="upload-placeholder" id="uploadPlaceholder">
+                                <div class="upload-icon">📁</div>
+                                <p>Click or drag image here</p>
+                                <span>Max size: 5MB</span>
+                            </div>
+                            <div class="image-preview" id="imagePreview" style="display: none;">
+                                <img id="previewImg" src="" alt="Preview">
+                                <button type="button" class="remove-image" id="removeImage">✕</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="form-group">
+                        <label for="tags">TAGS (COMMA SEPARATED)</label>
+                        <input 
+                            type="text" 
+                            id="tags" 
+                            name="tags" 
+                            placeholder="cinematic, vintage, animation, portrait..."
+                        >
+                        <span class="field-hint">Separate tags with commas</span>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="form-group">
+                        <label for="notes">NOTES</label>
+                        <textarea 
+                            id="notes" 
+                            name="notes" 
+                            rows="3" 
+                            placeholder="Any additional information or tips..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="window.location.href='index.html'">CANCEL</button>
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <span class="btn-text">SUBMIT PROMPT</span>
+                            <span class="btn-loader" style="display: none;">SUBMITTING...</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About Column -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">REDDY FOR AI</h3>
+                    <p class="footer-description">Your go-to library for trending AI image prompts. Discover, copy, and create stunning AI-generated artwork.</p>
+                </div>
+                
+                <!-- Quick Links Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ai-image-prompts.html">AI Image Prompts</a></li>
+                        <li><a href="submit.html">Submit Prompt</a></li>
+                        <li><a href="About.html">About</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-list">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social & Contact Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
+                            <span class="social-icon">in</span> LinkedIn
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link">
+                            <span class="social-icon">𝕏</span> Twitter
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                            <span class="social-icon">ig</span> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 REDDY FOR AI. All rights reserved. Made with AI for AI creators.</p>
+                <p style="font-size: 11px; opacity: 0.7; margin-top: 8px;">Empowering creativity through AI prompt engineering</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.24.min.js"></script>
+    <script src="config.js"></script>
+    <script src="submit.js"></script>
+    <script>
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

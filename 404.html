@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSPLC9L2CX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XSPLC9L2CX');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>404 - Page Not Found | REDDY FOR AI</title>
+    <meta name="title" content="404 - Page Not Found | REDDY FOR AI">
+    <meta name="description" content="The page you're looking for doesn't exist. Redirecting you back to our AI image prompts library.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: 1000;
+            color: #012732;
+            margin: 0;
+            font-family: fantasy;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #012732;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .btn-home {
+            padding: 15px 40px;
+            background: #012732;
+            color: #e2e1dc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #012732;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-home:hover {
+            background: transparent;
+            color: #012732;
+        }
+        
+        .btn-explore {
+            padding: 15px 40px;
+            background: transparent;
+            color: #012732;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #012732;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-explore:hover {
+            background: #012732;
+            color: #e2e1dc;
+        }
+        
+        .redirect-timer {
+            font-size: 14px;
+            color: #777;
+            margin-top: 30px;
+        }
+        
+        .timer-count {
+            font-weight: 600;
+            color: #012732;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 24px;
+            }
+            
+            .error-message {
+                font-size: 16px;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .btn-home,
+            .btn-explore {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Integrated Navigation -->
+    <header class="header" role="banner">
+        <div class="container-full">
+            <a href="index.html" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="ai-image-prompts.html">EXPLORE</a></li>
+                    <li><a href="submit.html">SUBMIT</a></li>
+                    <li><a href="About.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-message">
+                Oops! The page you're looking for doesn't exist. It might have been moved or deleted. 
+                Don't worry, we'll help you get back on track.
+            </p>
+            
+            <div class="error-actions">
+                <a href="index.html" class="btn-home">Go Home</a>
+                <a href="ai-image-prompts.html" class="btn-explore">Explore Prompts</a>
+            </div>
+            
+            <p class="redirect-timer">
+                Redirecting to home page in <span class="timer-count" id="countdown">5</span> seconds...
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About Column -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">REDDY FOR AI</h3>
+                    <p class="footer-description">Your go-to library for trending AI image prompts. Discover, copy, and create stunning AI-generated artwork.</p>
+                </div>
+                
+                <!-- Quick Links Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ai-image-prompts.html">Explore Prompts</a></li>
+                        <li><a href="submit.html">Submit Prompt</a></li>
+                        <li><a href="About.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-list">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social & Contact Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
+                            <span class="social-icon">in</span> LinkedIn
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link">
+                            <span class="social-icon">𝕏</span> Twitter
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                            <span class="social-icon">📷</span> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 REDDY FOR AI. All rights reserved. Made with ❤️ for AI creators.</p>
+                <p style="font-size: 11px; opacity: 0.7; margin-top: 8px;">Empowering creativity through AI prompt engineering</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Auto-redirect countdown
+            let seconds = 5;
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdown = setInterval(function() {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdown);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

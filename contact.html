@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSPLC9L2CX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XSPLC9L2CX');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | REDDY FOR AI</title>
+    <meta name="description" content="Contact REDDY FOR AI. Get in touch with us for questions, feedback, or support.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://reddyforai.com/contact">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .contact-intro h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #012732;
+            font-family: Staatliches;
+        }
+
+        .contact-intro p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: #fff;
+            border: 2px solid #012732;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #012732;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e1dc;
+            background: #fff;
+            font-size: 14px;
+            font-family: 'Figtree', Arial, sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #012732;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #012732;
+            color: #e2e1dc;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .contact-info {
+            background: #e2e1dc;
+            border: 2px solid #012732;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #012732;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info p {
+            color: #012732;
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: #012732;
+            text-decoration: underline;
+        }
+
+        #contactMessage {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            display: none;
+        }
+
+        #contactMessage.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        #contactMessage.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .contact-intro h1 {
+                font-size: 32px;
+            }
+
+            .contact-form {
+                padding: 25px 20px;
+            }
+
+            .contact-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Integrated Navigation -->
+    <header class="header" role="banner">
+        <div class="container-full">
+            <a href="index.html" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="ai-image-prompts.html">EXPLORE</a></li>
+                    <li><a href="submit.html">SUBMIT</a></li>
+                    <li><a href="About.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="contact-container">
+            <div class="contact-intro">
+                <h1>Contact Us</h1>
+                <p>Have a question or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.</p>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Technical Support</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="partnership">Partnership Opportunity</option>
+                        <option value="bug">Report a Bug</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+                
+                <div id="contactMessage"></div>
+            </form>
+
+            <div class="contact-info">
+                <h3>Other Ways to Reach Us</h3>
+                <p><strong>Email:</strong> <a href="mailto:sharath@reddyforai.com">sharath@reddyforai.com</a></p>
+                <p><strong>Response Time:</strong> Usually within 24-48 hours</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-heading">REDDY FOR AI</h3>
+                    <p class="footer-description">Your go-to library for trending AI image prompts. Discover, copy, and create stunning AI-generated artwork.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ai-image-prompts.html">AI Image Prompts</a></li>
+                        <li><a href="submit.html">Submit Prompt</a></li>
+                        <li><a href="About.html">About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-list">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
+                            <span class="social-icon">in</span> LinkedIn
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link">
+                            <span class="social-icon">𝕏</span> Twitter
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                            <span class="social-icon">ig</span> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 REDDY FOR AI. All rights reserved. Made with AI for AI creators.</p>
+                <p style="font-size: 11px; opacity: 0.7; margin-top: 8px;">Empowering creativity through AI prompt engineering</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // Contact form handling
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const contactMessage = document.getElementById('contactMessage');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            contactMessage.style.display = 'none';
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // Initialize Supabase client
+                const supabaseClient = supabase.createClient(
+                    SUPABASE_CONFIG.url,
+                    SUPABASE_CONFIG.anonKey
+                );
+
+                // Submit to Supabase
+                const { data, error } = await supabaseClient
+                    .from('contact_messages')
+                    .insert([formData]);
+
+                if (error) {
+                    throw error;
+                }
+
+                // Success
+                contactMessage.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
+                contactMessage.className = 'success';
+                contactMessage.style.display = 'block';
+                contactForm.reset();
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                contactMessage.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly at hello@reddyforai.com';
+                contactMessage.className = 'error';
+                contactMessage.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+    </script>
+</body>
+</html>
