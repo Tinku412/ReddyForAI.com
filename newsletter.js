@@ -6,9 +6,18 @@ let newsletterSupabaseClient;
 
 // Initialize the client when DOM is ready
 function initNewsletterClient() {
-    if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined') {
+    // Prefer SUPABASE_CONFIG (used by config.js on About, contact, etc.)
+    if (typeof supabase !== 'undefined' && typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG.url && SUPABASE_CONFIG.anonKey) {
+        newsletterSupabaseClient = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+        return;
+    }
+    // Fallback: SUPABASE_URL / SUPABASE_ANON_KEY (used by script.js on index)
+    if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && typeof SUPABASE_ANON_KEY !== 'undefined') {
         newsletterSupabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    } else if (typeof supabaseClient !== 'undefined') {
+        return;
+    }
+    // Fallback: use existing global supabaseClient (e.g. from script.js)
+    if (typeof supabaseClient !== 'undefined') {
         newsletterSupabaseClient = supabaseClient;
     }
 }
@@ -18,19 +27,32 @@ async function handleNewsletterSubmit(email, messageElementId, formId, inputElem
     const messageElement = document.getElementById(messageElementId);
     const submitButton = document.querySelector(`#${formId} button[type="submit"]`);
     const inputElement = document.getElementById(inputElementId);
-    const originalButtonText = submitButton.textContent;
+    const originalButtonText = submitButton ? submitButton.textContent : 'Subscribe';
     
     try {
+        // Ensure Supabase client is initialized (e.g. on About page after config.js loads)
+        if (!newsletterSupabaseClient) {
+            initNewsletterClient();
+        }
+        if (!newsletterSupabaseClient) {
+            showNewsletterMessage(messageElement, 'Newsletter service is not available. Please try again later.', 'error');
+            return;
+        }
+        
         // Disable button and show loading state
-        submitButton.disabled = true;
-        submitButton.textContent = 'Subscribing...';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Subscribing...';
+        }
         
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             showNewsletterMessage(messageElement, 'Please enter a valid email address', 'error');
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
             return;
         }
         
@@ -45,16 +67,20 @@ async function handleNewsletterSubmit(email, messageElementId, formId, inputElem
         if (checkError && checkError.code !== 'PGRST116') {
             console.error('Newsletter check error:', checkError);
             showNewsletterMessage(messageElement, 'Error checking subscription. Please try again.', 'error');
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
             return;
         }
         
         // If subscriber exists
         if (existingSubscribers && existingSubscribers.length > 0) {
             showNewsletterMessage(messageElement, 'You\'re already subscribed! 📧', 'info');
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
             return;
         }
         
@@ -74,7 +100,7 @@ async function handleNewsletterSubmit(email, messageElementId, formId, inputElem
             console.error('Newsletter subscription error:', error);
             showNewsletterMessage(messageElement, 'Oops! Something went wrong. Please try again.', 'error');
         } else {
-            showNewsletterMessage(messageElement, 'Success!', 'success');
+            showNewsletterMessage(messageElement, 'Success! You\'re subscribed. 📧', 'success');
             // Clear the email input
             if (inputElement) {
                 inputElement.value = '';
@@ -85,13 +111,16 @@ async function handleNewsletterSubmit(email, messageElementId, formId, inputElem
         console.error('Newsletter exception:', err);
         showNewsletterMessage(messageElement, 'Error subscribing. Please try again later.', 'error');
     } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     }
 }
 
 // Show message to user
 function showNewsletterMessage(element, message, type) {
+    if (!element) return;
     element.textContent = message;
     element.style.opacity = '1';
     element.style.color = type === 'error' ? '#ff6b6b' : type === 'info' ? '#ffd93d' : '#6bcf7f';

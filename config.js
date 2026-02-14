@@ -23,7 +23,8 @@ const CLOUDFLARE_CONFIG = {
     region: 'auto',
     // Public URL - Get this after enabling Public Access in R2
     // Will be something like: https://pub-xxxxx.r2.dev
-    publicUrl: 'https://pub-3a63070bc142458585a7ce3be4a46552.r2.dev' // ⚠️ UPDATE THIS after enabling public access
+    //publicUrl: 'https://pub-3a63070bc142458585a7ce3be4a46552.r2.dev' // ⚠️ UPDATE THIS after enabling public access
+    publicUrl: 'cdn.reddyforai.com'
 };
 
 // For backwards compatibility
