@@ -1,4 +1,4 @@
-# PROMPTWERK
+# ReddyforAI
 
 A minimal and aesthetic directory of AI prompts for generating images and videos, inspired by high-fashion websites like Balenciaga and MODELWERK.
 
