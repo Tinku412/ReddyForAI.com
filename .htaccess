@@ -40,7 +40,19 @@
     RewriteRule ^(.*)\.html$ /$1 [R=301,L]
 
     # ======================================
-    # 6. HANDLE EXTENSIONLESS URLs (Add .html internally)
+    # 6. REDIRECT ROOT MODEL PAGES TO CANONICAL URLS
+    # ======================================
+    RewriteRule ^gemini/?$ /ai-image-prompts/gemini [R=301,L]
+    RewriteRule ^chatgpt/?$ /ai-image-prompts/chatgpt [R=301,L]
+
+    # ======================================
+    # 7. AI-IMAGE-PROMPTS SUBROUTES (gemini, chatgpt)
+    # ======================================
+    RewriteRule ^ai-image-prompts/gemini/?$ /ai-image-prompts/gemini/index.html [L]
+    RewriteRule ^ai-image-prompts/chatgpt/?$ /ai-image-prompts/chatgpt/index.html [L]
+
+    # ======================================
+    # 8. HANDLE EXTENSIONLESS URLs (Add .html internally)
     # ======================================
     # If the file doesn't exist and it's not a directory
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -51,7 +63,7 @@
     RewriteRule ^(.*)$ $1.html [L]
 
     # ======================================
-    # 7. HANDLE /prompt/ PATH-BASED ROUTING
+    # 9. HANDLE /prompt/ PATH-BASED ROUTING
     # ======================================
     # Redirect all /prompt/* URLs to /prompt/index.html for client-side routing
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -59,7 +71,7 @@
     RewriteRule ^prompt/(.+)$ /prompt/index.html [L,QSA]
 
     # ======================================
-    # 8. HANDLE ROOT INDEX
+    # 10. HANDLE ROOT INDEX
     # ======================================
     # Serve index.html when accessing root
     RewriteCond %{REQUEST_FILENAME} !-f

@@ -286,6 +286,36 @@ body {
     font-weight: 400;
 }
 
+/* Model filter chips (Gemini, ChatGPT) */
+.model-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 24px auto 32px;
+    max-width: 900px;
+}
+
+.model-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--secondary-bg);
+    color: var(--secondary-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.model-chip:hover {
+    background: var(--primary-bg);
+    color: var(--primary-text);
+}
+
 /* Main Content */
 .main-content {
     padding: 20px 0;

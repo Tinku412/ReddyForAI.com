@@ -14,15 +14,22 @@ let allPrompts = [];
 let isLoading = false;
 let currentPrompt = null;
 
-// Fetch prompts from Supabase
+// Fetch prompts from Supabase (optional filter: set window.PROMPT_MODEL_FILTER e.g. 'Gemini', 'ChatGPT')
 async function fetchPromptsFromSupabase() {
     try {
-        console.log('📡 Fetching prompts from Supabase...');
-        const { data, error } = await supabaseClient
+        const modelFilter = typeof window.PROMPT_MODEL_FILTER !== 'undefined' ? window.PROMPT_MODEL_FILTER : null;
+        console.log('📡 Fetching prompts from Supabase...' + (modelFilter ? ` (filter: ${modelFilter})` : ''));
+        
+        let query = supabaseClient
             .from('prompts')
             .select('*')
-            .eq('is_active', true)
-            .order('created_at', { ascending: false });
+            .eq('is_active', true);
+        
+        if (modelFilter) {
+            query = query.eq('model_name', modelFilter);
+        }
+        
+        const { data, error } = await query.order('created_at', { ascending: false });
         
         if (error) {
             console.error('❌ Error fetching prompts:', error);
@@ -141,7 +148,7 @@ function renderPrompts(prompts) {
 // Open Pinterest-style modal
 // Navigate to prompt detail page
 function navigateToPromptPage(promptId) {
-    window.location.href = `promptdetails.html?id=${promptId}`;
+    window.location.href = `/promptdetails.html?id=${promptId}`;
 }
 
 // Render single prompt detail view (full page)

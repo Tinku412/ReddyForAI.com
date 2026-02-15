@@ -160,7 +160,7 @@ function createPromptCard(prompt) {
 
 // Navigate to prompt detail page
 function navigateToPromptPage(promptId) {
-    window.location.href = `promptdetails.html?id=${promptId}`;
+    window.location.href = `/promptdetails.html?id=${promptId}`;
 }
 
 // Save prompt functionality
