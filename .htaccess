@@ -46,13 +46,19 @@
     RewriteRule ^chatgpt/?$ /ai-image-prompts/chatgpt [R=301,L]
 
     # ======================================
-    # 7. AI-IMAGE-PROMPTS SUBROUTES (gemini, chatgpt)
+    # 7. AI-IMAGE-PROMPTS BASE (avoid 403: directory has no index)
+    # ======================================
+    # Serve root ai-image-prompts.html for /ai-image-prompts and /ai-image-prompts/
+    RewriteRule ^ai-image-prompts/?$ /ai-image-prompts.html [L]
+
+    # ======================================
+    # 8. AI-IMAGE-PROMPTS SUBROUTES (gemini, chatgpt)
     # ======================================
     RewriteRule ^ai-image-prompts/gemini/?$ /ai-image-prompts/gemini/index.html [L]
     RewriteRule ^ai-image-prompts/chatgpt/?$ /ai-image-prompts/chatgpt/index.html [L]
 
     # ======================================
-    # 8. HANDLE EXTENSIONLESS URLs (Add .html internally)
+    # 9. HANDLE EXTENSIONLESS URLs (Add .html internally)
     # ======================================
     # If the file doesn't exist and it's not a directory
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -63,7 +69,7 @@
     RewriteRule ^(.*)$ $1.html [L]
 
     # ======================================
-    # 9. HANDLE /prompt/ PATH-BASED ROUTING
+    # 10. HANDLE /prompt/ PATH-BASED ROUTING
     # ======================================
     # Redirect all /prompt/* URLs to /prompt/index.html for client-side routing
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -71,7 +77,7 @@
     RewriteRule ^prompt/(.+)$ /prompt/index.html [L,QSA]
 
     # ======================================
-    # 10. HANDLE ROOT INDEX
+    # 11. HANDLE ROOT INDEX
     # ======================================
     # Serve index.html when accessing root
     RewriteCond %{REQUEST_FILENAME} !-f
