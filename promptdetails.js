@@ -1,8 +1,7 @@
-// Initialize Supabase client
-const supabaseClient = supabase.createClient(
-    SUPABASE_CONFIG.url,
-    SUPABASE_CONFIG.anonKey
-);
+// Use single shared client (from auth.js) when available to avoid multiple GoTrueClient / LockManager timeout
+const supabaseClient = window.ReddySupabase || (typeof supabase !== 'undefined' && SUPABASE_CONFIG
+    ? supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey)
+    : null);
 
 // Get prompt ID from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -228,9 +227,22 @@ function populatePromptDetails(prompt) {
     });
     
     // Setup save button
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        savePrompt(prompt.id);
-    });
+    var saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            savePrompt(prompt.id);
+        });
+        if (window.ReddyAuth && window.ReddyAuth.isLoggedIn()) {
+            window.ReddyAuth.getSavedPromptIds().then(function(ids) {
+                if (ids && ids.indexOf(prompt.id) !== -1 && saveBtn) {
+                    saveBtn.textContent = '✓ Saved';
+                    saveBtn.classList.add('save-btn-saved');
+                    saveBtn.disabled = true;
+                    saveBtn.style.pointerEvents = 'none';
+                }
+            });
+        }
+    }
 }
 
 // Load related prompts
@@ -385,10 +397,30 @@ function copyToClipboard(text) {
     }
 }
 
-// Save prompt (placeholder)
+// Save prompt: show sign-in modal if not logged in, else save to backend
 function savePrompt(id) {
-    showNotification('Save feature coming soon!', 'info');
-    console.log('Save prompt:', id);
+    if (!window.ReddyAuth) {
+        showNotification('Save feature loading...', 'info');
+        return;
+    }
+    if (!window.ReddyAuth.isLoggedIn()) {
+        window.ReddyAuth.showAuthModal(id);
+        return;
+    }
+    window.ReddyAuth.savePromptToBackend(id).then(function(result) {
+        if (result.ok) {
+            showNotification('Saved! View your collection on the Saved page.', 'success');
+            var saveBtn = document.getElementById('saveBtn');
+            if (saveBtn) {
+                saveBtn.textContent = '✓ Saved';
+                saveBtn.classList.add('save-btn-saved');
+                saveBtn.disabled = true;
+                saveBtn.style.pointerEvents = 'none';
+            }
+        } else {
+            showNotification(result.error || 'Could not save. Try again.', 'error');
+        }
+    });
 }
 
 // Show notification

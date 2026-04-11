@@ -4,21 +4,22 @@
 // Initialize Supabase client (using existing configuration)
 let newsletterSupabaseClient;
 
-// Initialize the client when DOM is ready
+// Initialize the client when DOM is ready. Prefer single shared client to avoid LockManager / multiple GoTrueClient.
 function initNewsletterClient() {
-    // Prefer SUPABASE_CONFIG (used by config.js on About, contact, etc.)
+    if (window.ReddySupabase) {
+        newsletterSupabaseClient = window.ReddySupabase;
+        return;
+    }
+    if (typeof supabaseClient !== 'undefined') {
+        newsletterSupabaseClient = supabaseClient;
+        return;
+    }
     if (typeof supabase !== 'undefined' && typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG.url && SUPABASE_CONFIG.anonKey) {
         newsletterSupabaseClient = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
         return;
     }
-    // Fallback: SUPABASE_URL / SUPABASE_ANON_KEY (used by script.js on index)
     if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && typeof SUPABASE_ANON_KEY !== 'undefined') {
         newsletterSupabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        return;
-    }
-    // Fallback: use existing global supabaseClient (e.g. from script.js)
-    if (typeof supabaseClient !== 'undefined') {
-        newsletterSupabaseClient = supabaseClient;
     }
 }
 

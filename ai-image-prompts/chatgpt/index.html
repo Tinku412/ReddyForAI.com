@@ -36,6 +36,7 @@
     <link rel="icon" type="image/png" href="../../favicon.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
     <link rel="stylesheet" href="../../styles-masonry.css">
+    <link rel="stylesheet" href="../../auth-modal.css">
     
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"CollectionPage","name":"ChatGPT Image Prompts Library","description":"Curated library of AI image prompts for ChatGPT and DALL-E.","url":"https://reddyforai.com/ai-image-prompts/chatgpt","keywords":["ChatGPT prompts","DALL-E prompts","ChatGPT image generation"],"isPartOf":{"@type":"WebSite","name":"REDDY FOR AI","url":"https://reddyforai.com/"}}
@@ -53,6 +54,7 @@
                 <ul class="nav-links" id="navLinks">
                     <li><a href="../../index.html">HOME</a></li>
                     <li><a href="../../ai-image-prompts.html" class="active">EXPLORE</a></li>
+                    <li><a href="../../saved.html">SAVED</a></li>
                     <li><a href="../../submit.html">SUBMIT</a></li>
                     <li><a href="../../About.html">ABOUT</a></li>
                 </ul>
@@ -145,7 +147,8 @@
 
     <div class="loading-indicator" id="loadingIndicator"><div class="spinner"></div><p>Loading more prompts...</p></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@canary"></script>
+    <script src="../../auth.js"></script>
     <script>window.PROMPT_MODEL_FILTER = 'ChatGPT';</script>
     <script src="../../script-masonry.js"></script>
     <script>

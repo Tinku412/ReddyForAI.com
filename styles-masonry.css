@@ -98,7 +98,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -421,6 +421,18 @@ body {
 
 .save-btn:hover {
     background: #f0f0f0;
+}
+
+.save-btn-saved,
+.prompt-card.is-saved .save-btn-saved {
+    background: #012732;
+    color: #e2e1dc;
+    cursor: default;
+    pointer-events: none;
+}
+
+.save-btn-saved:hover {
+    background: #012732;
 }
 
 /* Card Footer with Tags and Actions */

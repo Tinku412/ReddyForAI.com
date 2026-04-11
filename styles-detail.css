@@ -432,6 +432,14 @@ body {
     background: #333;
 }
 
+.save-btn-large.save-btn-saved,
+.save-btn-large:disabled.save-btn-saved {
+    background: #012732;
+    color: #e2e1dc;
+    cursor: default;
+    opacity: 0.9;
+}
+
 .detail-notes {
     background: #f9f9f9;
     padding: 15px;

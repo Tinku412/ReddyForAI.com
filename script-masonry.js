@@ -1,10 +1,5 @@
-// Supabase Configuration
-const SUPABASE_URL = 'https://cptyulgugrykwgltriom.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdHl1bGd1Z3J5a3dnbHRyaW9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyNzgwMjIsImV4cCI6MjA4Mzg1NDAyMn0.PywFZSO1508wLPG2ix7aAQGqXROHIF9VkTkgXaPgupg';
-
-// Initialize Supabase client
-const { createClient } = supabase;
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Single shared Supabase client (from auth.js). Set when ready to avoid LockManager / multiple GoTrueClient.
+var supabaseClient = null;
 
 // No mock data - using only database images
 
@@ -14,11 +9,20 @@ let allPrompts = [];
 let isLoading = false;
 let currentPrompt = null;
 
+// Retry helper for lock-related errors when navigating between Gemini/ChatGPT pages
+function isLockOrAbortError(err) {
+    if (!err) return false;
+    var msg = (err.message || '') + (err.details || '');
+    return /lock|Lock|AbortError|steal/i.test(msg);
+}
+
 // Fetch prompts from Supabase (optional filter: set window.PROMPT_MODEL_FILTER e.g. 'Gemini', 'ChatGPT')
-async function fetchPromptsFromSupabase() {
+async function fetchPromptsFromSupabase(retryCount) {
+    retryCount = retryCount || 0;
+    if (!supabaseClient) return;
     try {
         const modelFilter = typeof window.PROMPT_MODEL_FILTER !== 'undefined' ? window.PROMPT_MODEL_FILTER : null;
-        console.log('📡 Fetching prompts from Supabase...' + (modelFilter ? ` (filter: ${modelFilter})` : ''));
+        console.log('📡 Fetching prompts from Supabase...' + (modelFilter ? ' (filter: ' + modelFilter + ')' : '') + (retryCount ? ' (retry ' + retryCount + ')' : ''));
         
         let query = supabaseClient
             .from('prompts')
@@ -32,6 +36,11 @@ async function fetchPromptsFromSupabase() {
         const { data, error } = await query.order('created_at', { ascending: false });
         
         if (error) {
+            if (retryCount < 2 && isLockOrAbortError(error)) {
+                console.warn('Lock/abort error, retrying in 2s...');
+                await new Promise(function(r) { setTimeout(r, 2000); });
+                return fetchPromptsFromSupabase(retryCount + 1);
+            }
             console.error('❌ Error fetching prompts:', error);
             allPrompts = [];
             return;
@@ -57,40 +66,73 @@ async function fetchPromptsFromSupabase() {
             console.warn('⚠️ No active prompts in database');
         }
     } catch (err) {
+        if (retryCount < 2 && isLockOrAbortError(err)) {
+            console.warn('Lock/abort exception, retrying in 2s...');
+            await new Promise(function(r) { setTimeout(r, 2000); });
+            return fetchPromptsFromSupabase(retryCount + 1);
+        }
         console.error('❌ Exception fetching prompts:', err);
         allPrompts = [];
     }
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', async () => {
+// Initialize - wait for shared Supabase client from auth.js
+function runMasonryInit() {
+    async function init() {
+        await fetchPromptsFromSupabase();
+        var savedIds = [];
+        if (window.ReddyAuth && window.ReddyAuth.isLoggedIn()) {
+            try { savedIds = await window.ReddyAuth.getSavedPromptIds(); } catch (e) {}
+        }
+        renderPrompts(allPrompts, savedIds);
+        setupInfiniteScroll();
+        setupEventListeners();
+        handleDeepLink();
+        console.log('✅ Gallery initialized with', allPrompts.length, 'prompts');
+    }
+    init();
+}
+document.addEventListener('DOMContentLoaded', function() {
     console.log('✨ DOM loaded, initializing masonry gallery...');
-    
-    // Fetch data from Supabase first
-    await fetchPromptsFromSupabase();
-    
-    // Render all prompts without duplication
-    renderPrompts(allPrompts);
-    setupInfiniteScroll();
-    setupEventListeners();
-    
-    // Check for deep link after rendering
-    handleDeepLink();
-    
-    console.log('✅ Gallery initialized with', allPrompts.length, 'prompts');
+    if (window.ReddySupabase) {
+        supabaseClient = window.ReddySupabase;
+        runMasonryInit();
+        return;
+    }
+    if (typeof window.ReddySupabaseReady === 'function') {
+        window.ReddySupabaseReady(function(c) {
+            supabaseClient = c;
+            runMasonryInit();
+        });
+        setTimeout(function() {
+            if (supabaseClient) return;
+            var s = window.supabase;
+            if (s && s.createClient) supabaseClient = s.createClient('https://cptyulgugrykwgltriom.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdHl1bGd1Z3J5a3dnbHRyaW9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyNzgwMjIsImV4cCI6MjA4Mzg1NDAyMn0.PywFZSO1508wLPG2ix7aAQGqXROHIF9VkTkgXaPgupg');
+            if (supabaseClient) runMasonryInit();
+        }, 12000);
+    } else {
+        var s = window.supabase;
+        if (s && s.createClient) supabaseClient = s.createClient('https://cptyulgugrykwgltriom.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdHl1bGd1Z3J5a3dnbHRyaW9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyNzgwMjIsImV4cCI6MjA4Mzg1NDAyMn0.PywFZSO1508wLPG2ix7aAQGqXROHIF9VkTkgXaPgupg');
+        if (supabaseClient) runMasonryInit();
+    }
 });
 
-// Render prompt cards with Pinterest-style hover
-function renderPrompts(prompts) {
+// Render prompt cards with Pinterest-style hover. savedIds = optional array of already-saved prompt IDs.
+function renderPrompts(prompts, savedIds) {
     const gallery = document.getElementById('galleryGrid');
+    var savedSet = (savedIds && Array.isArray(savedIds)) ? new Set(savedIds) : new Set();
     
     prompts.forEach((prompt, index) => {
         const card = document.createElement('div');
-        card.className = 'prompt-card';
+        var isSaved = savedSet.has(prompt.id);
+        card.className = 'prompt-card' + (isSaved ? ' is-saved' : '');
         card.dataset.promptId = prompt.id;
         
         // Get first 2 tags
         const displayTags = prompt.tags ? prompt.tags.slice(0, 2) : [];
+        var saveBtnHtml = isSaved
+            ? '<span class="save-btn save-btn-saved" aria-label="Saved">✓ Saved</span>'
+            : '<button class="save-btn" onclick="event.stopPropagation(); savePrompt(\'' + prompt.id + '\')">Save</button>';
         
         card.innerHTML = `
             <div class="card-image-wrapper">
@@ -98,7 +140,7 @@ function renderPrompts(prompts) {
             </div>
             <div class="card-content">
                 <div class="card-header">
-                    <button class="save-btn" onclick="event.stopPropagation(); savePrompt(${prompt.id})">Save</button>
+                    ${saveBtnHtml}
                 </div>
                 <div class="card-footer">
                     ${displayTags.length > 0 ? `
@@ -234,7 +276,7 @@ function renderPromptDetailView(prompt) {
                     </div>
                 ` : ''}
                 
-                <button class="save-btn-large" onclick="savePrompt('${prompt.id}')">
+                <button class="save-btn-large" onclick="event.stopPropagation(); savePrompt('${prompt.id}')">
                     ❤️ Save to Collection
                 </button>
             </div>
@@ -352,11 +394,45 @@ function copyPromptText(promptText) {
     }
 }
 
-// Placeholder for save function (implement later)
+// Save prompt: show sign-in modal if not logged in, else save to backend
 function savePrompt(promptId) {
-    showNotification('Save feature coming soon! ❤️');
-    console.log('Save prompt:', promptId);
+    if (!window.ReddyAuth) {
+        showNotification('Save feature loading...', 'info');
+        return;
+    }
+    if (!window.ReddyAuth.isLoggedIn()) {
+        window.ReddyAuth.showAuthModal(promptId);
+        return;
+    }
+    window.ReddyAuth.savePromptToBackend(promptId).then(function(result) {
+        if (result.ok) {
+            showNotification('Saved! View your collection on the Saved page. ❤️');
+            markCardAsSaved(promptId);
+        } else {
+            showNotification(result.error || 'Could not save. Try again.', 'error');
+        }
+    });
 }
+
+function markCardAsSaved(promptId) {
+    var card = document.querySelector('.prompt-card[data-prompt-id="' + promptId + '"]');
+    if (!card || card.classList.contains('is-saved')) return;
+    card.classList.add('is-saved');
+    var header = card.querySelector('.card-header');
+    if (header) {
+        var oldBtn = header.querySelector('.save-btn');
+        if (oldBtn) {
+            var span = document.createElement('span');
+            span.className = 'save-btn save-btn-saved';
+            span.setAttribute('aria-label', 'Saved');
+            span.textContent = '✓ Saved';
+            oldBtn.replaceWith(span);
+        }
+    }
+}
+window.addEventListener('reddy-prompt-saved', function(e) {
+    if (e.detail && e.detail.promptId) markCardAsSaved(e.detail.promptId);
+});
 
 // Handle deep linking - Check URL for prompt parameter on page load
 async function handleDeepLink() {
@@ -527,16 +603,21 @@ if (loadMoreBtn) {
     });
 }
 
-// Close modal on outside click
-document.getElementById('promptModal').addEventListener('click', (e) => {
-    if (e.target.id === 'promptModal') {
-        closeModal();
-    }
-});
+// Close modal on outside click (only if modal exists on this page)
+var promptModalEl = document.getElementById('promptModal');
+if (promptModalEl) {
+    promptModalEl.addEventListener('click', (e) => {
+        if (e.target.id === 'promptModal') {
+            closeModal();
+        }
+    });
+}
 
 // Close modal on Escape key
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.getElementById('promptModal').classList.contains('active')) {
+    if (e.key !== 'Escape') return;
+    var modal = document.getElementById('promptModal');
+    if (modal && modal.classList.contains('active')) {
         closeModal();
     }
 });

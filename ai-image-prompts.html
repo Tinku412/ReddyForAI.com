@@ -42,9 +42,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
     <link rel="stylesheet" href="/styles-masonry.css">
-    
-    <!-- Supabase JS Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="/auth-modal.css">
     
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
@@ -113,6 +111,7 @@
                 <ul class="nav-links" id="navLinks">
                     <li><a href="/">HOME</a></li>
                     <li><a href="/ai-image-prompts" class="active">EXPLORE</a></li>
+                    <li><a href="/saved.html">SAVED</a></li>
                     <li><a href="/submit.html">SUBMIT</a></li>
                     <li><a href="/About.html">ABOUT</a></li>
                 </ul>
@@ -244,7 +243,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@canary"></script>
+    <script src="/auth.js"></script>
     <script src="/script-masonry.js"></script>
     <script>
         // Hamburger menu functionality

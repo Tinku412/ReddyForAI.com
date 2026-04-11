@@ -1,10 +1,7 @@
-// Config is loaded from config.js script tag
-// Initialize Supabase client
+// Config is loaded from config.js script tag. Use shared client when available (e.g. from auth.js on other pages).
 const { createClient } = window.supabase || {};
-let supabaseClient;
-
-// Check if Supabase is loaded
-if (createClient) {
+let supabaseClient = window.ReddySupabase;
+if (!supabaseClient && createClient && supabaseConfig) {
     supabaseClient = createClient(supabaseConfig.url, supabaseConfig.anonKey);
 }
 

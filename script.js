@@ -1,10 +1,5 @@
-// Supabase Configuration
-const SUPABASE_URL = 'https://cptyulgugrykwgltriom.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdHl1bGd1Z3J5a3dnbHRyaW9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyNzgwMjIsImV4cCI6MjA4Mzg1NDAyMn0.PywFZSO1508wLPG2ix7aAQGqXROHIF9VkTkgXaPgupg';
-
-// Initialize Supabase client
-const { createClient } = supabase;
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Single shared Supabase client (from auth.js). Set when ready to avoid LockManager / multiple GoTrueClient.
+var supabaseClient = null;
 
 // Global variables
 let allPrompts = [];
@@ -16,12 +11,17 @@ const promptsPerLoad = 4;
 async function initGallery() {
     console.log('🚀 Initializing gallery...');
     await fetchPromptsFromSupabase();
-    renderPrompts();
+    var savedIds = [];
+    if (window.ReddyAuth && window.ReddyAuth.isLoggedIn()) {
+        try { savedIds = await window.ReddyAuth.getSavedPromptIds(); } catch (e) {}
+    }
+    renderPrompts(savedIds);
     setupEventListeners();
 }
 
 // Fetch prompts from Supabase
 async function fetchPromptsFromSupabase() {
+    if (!supabaseClient) return;
     try {
         console.log('📡 Fetching prompts from Supabase...');
         const { data, error } = await supabaseClient
@@ -61,11 +61,12 @@ async function fetchPromptsFromSupabase() {
     }
 }
 
-// Render prompts to the gallery
-function renderPrompts() {
+// Render prompts to the gallery. savedIds = optional array of already-saved prompt IDs.
+function renderPrompts(savedIds) {
     const galleryGrid = document.getElementById('galleryGrid');
     const filteredPrompts = filterPrompts();
     const promptsToShow = filteredPrompts.slice(0, displayedPrompts);
+    window.__savedPromptIds = (savedIds && Array.isArray(savedIds)) ? new Set(savedIds) : new Set();
     
     galleryGrid.innerHTML = '';
     
@@ -101,11 +102,15 @@ function filterPrompts() {
 // Create a prompt card element
 function createPromptCard(prompt) {
     const card = document.createElement('div');
-    card.className = 'prompt-card';
+    var isSaved = window.__savedPromptIds ? window.__savedPromptIds.has(prompt.id) : false;
+    card.className = 'prompt-card' + (isSaved ? ' is-saved' : '');
     card.dataset.id = prompt.id;
     
     // Get first 2 tags
     const displayTags = prompt.tags ? prompt.tags.slice(0, 2) : [];
+    var saveBtnHtml = isSaved
+        ? '<span class="save-btn save-btn-saved" aria-label="Saved">✓ Saved</span>'
+        : '<button class="save-btn" onclick="event.stopPropagation(); savePrompt(\'' + prompt.id + '\')">Save</button>';
     
     card.innerHTML = `
         <div class="card-image-wrapper">
@@ -113,7 +118,7 @@ function createPromptCard(prompt) {
         </div>
         <div class="card-content">
             <div class="card-header">
-                <button class="save-btn" onclick="event.stopPropagation(); savePrompt(${prompt.id})">Save</button>
+                ${saveBtnHtml}
             </div>
             <div class="card-footer">
                 ${displayTags.length > 0 ? `
@@ -163,11 +168,45 @@ function navigateToPromptPage(promptId) {
     window.location.href = `/promptdetails.html?id=${promptId}`;
 }
 
-// Save prompt functionality
+// Save prompt: show sign-in modal if not logged in, else save to backend
 function savePrompt(promptId) {
-    showNotification('Save feature coming soon! ❤️');
-    console.log('Save prompt:', promptId);
+    if (!window.ReddyAuth) {
+        showNotification('Save feature loading...', 'info');
+        return;
+    }
+    if (!window.ReddyAuth.isLoggedIn()) {
+        window.ReddyAuth.showAuthModal(promptId);
+        return;
+    }
+    window.ReddyAuth.savePromptToBackend(promptId).then(function(result) {
+        if (result.ok) {
+            showNotification('Saved! View your collection on the Saved page. ❤️');
+            markCardAsSaved(promptId);
+        } else {
+            showNotification(result.error || 'Could not save. Try again.', 'error');
+        }
+    });
 }
+
+function markCardAsSaved(promptId) {
+    var card = document.querySelector('.prompt-card[data-id="' + promptId + '"]');
+    if (!card || card.classList.contains('is-saved')) return;
+    card.classList.add('is-saved');
+    var header = card.querySelector('.card-header');
+    if (header) {
+        var oldBtn = header.querySelector('.save-btn');
+        if (oldBtn) {
+            var span = document.createElement('span');
+            span.className = 'save-btn save-btn-saved';
+            span.setAttribute('aria-label', 'Saved');
+            span.textContent = '✓ Saved';
+            oldBtn.replaceWith(span);
+        }
+    }
+}
+window.addEventListener('reddy-prompt-saved', function(e) {
+    if (e.detail && e.detail.promptId) markCardAsSaved(e.detail.promptId);
+});
 
 // Copy prompt to clipboard
 function copyPrompt(promptId) {
@@ -347,8 +386,31 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize on DOM load - wait for shared Supabase client from auth.js to avoid lock contention
+document.addEventListener('DOMContentLoaded', function() {
     console.log('✨ DOM loaded, initializing gallery...');
-    initGallery();
+    function runGallery() {
+        if (window.ReddySupabase) {
+            supabaseClient = window.ReddySupabase;
+            initGallery();
+            return;
+        }
+        if (typeof window.ReddySupabaseReady === 'function') {
+            window.ReddySupabaseReady(function(c) {
+                supabaseClient = c;
+                initGallery();
+            });
+            setTimeout(function() {
+                if (supabaseClient) return;
+                var s = window.supabase;
+                if (s && s.createClient) supabaseClient = s.createClient('https://cptyulgugrykwgltriom.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdHl1bGd1Z3J5a3dnbHRyaW9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyNzgwMjIsImV4cCI6MjA4Mzg1NDAyMn0.PywFZSO1508wLPG2ix7aAQGqXROHIF9VkTkgXaPgupg');
+                if (supabaseClient) initGallery();
+            }, 12000);
+        } else {
+            var s = window.supabase;
+            if (s && s.createClient) supabaseClient = s.createClient('https://cptyulgugrykwgltriom.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdHl1bGd1Z3J5a3dnbHRyaW9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyNzgwMjIsImV4cCI6MjA4Mzg1NDAyMn0.PywFZSO1508wLPG2ix7aAQGqXROHIF9VkTkgXaPgupg');
+            if (supabaseClient) initGallery();
+        }
+    }
+    runGallery();
 });

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Prompts | REDDY FOR AI</title>
+    <meta name="description" content="Your saved AI image prompts. Sign in with Google to save and view your collection.">
+    <link rel="canonical" href="https://reddyforai.com/saved.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles-masonry.css">
+    <link rel="stylesheet" href="auth-modal.css">
+    <style>
+        .saved-page-section { display: none; }
+        .saved-page-section#saved-signin-section { max-width: 480px; margin: 40px auto; padding: 32px 24px; text-align: center; background: #fff; border: 2px solid #012732; }
+        .saved-page-section .saved-signin-title { font-size: 24px; color: #012732; margin-bottom: 12px; }
+        .saved-page-section .saved-signin-text { font-size: 15px; color: #333; margin-bottom: 24px; line-height: 1.5; }
+        .saved-google-btn { width: 100%; max-width: 280px; padding: 14px 20px; font-size: 16px; font-weight: 600; color: #333; background: #fff; border: 1px solid #dadce0; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 12px; }
+        .saved-google-btn:hover { background: #f8f9fa; }
+        .saved-empty { text-align: center; padding: 48px 20px; font-size: 16px; color: #666; grid-column: 1 / -1; }
+        #saved-error { display: none; text-align: center; color: #c00; margin-bottom: 16px; }
+        .saved-remove-btn { font-size: 12px; }
+        /* Grid layout for Saved page (no masonry) */
+        .saved-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .saved-grid .saved-grid-card {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .saved-grid .card-image-wrapper {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .saved-grid .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .saved-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        }
+        @media (max-width: 768px) {
+            .saved-page-section#saved-signin-section { margin: 24px 16px; padding: 24px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" role="banner">
+        <div class="container-full">
+            <a href="/" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/ai-image-prompts">EXPLORE</a></li>
+                    <li><a href="/saved.html" class="active">SAVED</a></li>
+                    <li><a href="/submit.html">SUBMIT</a></li>
+                    <li><a href="/About.html">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breadcrumb-container">
+        <div class="container-full">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <a href="/">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Saved</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="main-content" role="main">
+        <div class="container-full">
+            <h1 class="gallery-title" style="text-align: center; margin: 40px 20px 20px; font-size: clamp(2rem, 8vw, 105px); font-family: fantasy;">Saved Prompts</h1>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 32px; font-size: 16px; color: #333;">Your collection of saved AI image prompts. Click a card to view details or remove to unsave.</p>
+
+            <div id="saved-signin-section" class="saved-page-section">
+                <h2 class="saved-signin-title">Sign in to see your saved prompts</h2>
+                <p class="saved-signin-text">Use Google to sign in. Your saved prompts will appear here and sync across devices.</p>
+                <button type="button" class="saved-google-btn" id="savedSignInBtn">
+                    <span class="auth-google-icon" style="width:20px;height:20px;background:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%234285F4%22 d=%22M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z%22/%3E%3Cpath fill=%22%2334A853%22 d=%22M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z%22/%3E%3Cpath fill=%22%23FBBC05%22 d=%22M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z%22/%3E%3Cpath fill=%22%23EA4335%22 d=%22M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z%22/%3E%3C/svg%3E') center/contain no-repeat;"></span>
+                    Sign in with Google
+                </button>
+            </div>
+
+            <div id="saved-list-section" class="saved-page-section">
+                <p id="saved-error"></p>
+                <div id="savedGrid" class="saved-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container-full">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-heading">REDDY FOR AI</h3>
+                    <p class="footer-description">Your go-to library for trending AI image prompts. Discover, copy, and create stunning AI-generated artwork.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/ai-image-prompts">AI Image Prompts</a></li>
+                        <li><a href="/saved.html">Saved</a></li>
+                        <li><a href="/submit.html">Submit Prompt</a></li>
+                        <li><a href="/About.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-list">
+                        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link"><span class="social-icon">in</span> LinkedIn</a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link"><span class="social-icon">𝕏</span> Twitter</a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link"><span class="social-icon">ig</span> Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 REDDY FOR AI. All rights reserved. Made with AI for AI creators.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="saved.js"></script>
+    <script>
+        function showNotification(message, type) {
+            var el = document.getElementById('notification');
+            if (el) { el.textContent = message; el.className = 'notification ' + (type || 'success') + ' show'; setTimeout(function() { el.classList.remove('show'); }, 3000); }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var h = document.getElementById('hamburgerBtn'), n = document.getElementById('navLinks');
+            if (h && n) {
+                h.addEventListener('click', function() { h.classList.toggle('active'); n.classList.toggle('active'); });
+                n.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { h.classList.remove('active'); n.classList.remove('active'); }); });
+                document.addEventListener('click', function(e) { if (!h.contains(e.target) && !n.contains(e.target)) { h.classList.remove('active'); n.classList.remove('active'); } });
+            }
+        });
+    </script>
+</body>
+</html>
