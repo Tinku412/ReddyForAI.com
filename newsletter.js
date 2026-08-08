@@ -124,11 +124,20 @@ function showNewsletterMessage(element, message, type) {
     if (!element) return;
     element.textContent = message;
     element.style.opacity = '1';
-    element.style.color = type === 'error' ? '#ff6b6b' : type === 'info' ? '#ffd93d' : '#6bcf7f';
-    
-    // Hide message after 5 seconds
+    element.classList.add('show');
+    element.classList.remove('ok', 'err');
+    if (type === 'error') {
+        element.classList.add('err');
+        element.style.color = '#c0123c';
+    } else if (type === 'info') {
+        element.style.color = '#b8860b';
+    } else {
+        element.classList.add('ok');
+        element.style.color = '#0a7a3e';
+    }
     setTimeout(() => {
         element.style.opacity = '0';
+        element.classList.remove('show');
     }, 5000);
 }
 

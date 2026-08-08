@@ -58,15 +58,6 @@
     RewriteRule ^ai-image-prompts/chatgpt/?$ /ai-image-prompts/chatgpt/index.html [L]
 
     # ======================================
-    # 8b. BLOG SUBROUTES (clean URLs for blog articles)
-    # ======================================
-    # Serve blog article .html files for clean /blog/slug URLs
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{DOCUMENT_ROOT}/blog/%1.html -f
-    RewriteRule ^blog/([^/]+)/?$ /blog/$1.html [L]
-
-    # ======================================
     # 9. HANDLE EXTENSIONLESS URLs (Add .html internally)
     # ======================================
     # If the file doesn't exist and it's not a directory

@@ -1,402 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XSPLC9L2CX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XSPLC9L2CX');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSPLC9L2CX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XSPLC9L2CX');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>AI Image Prompt Guides & Tutorials | REDDY FOR AI</title>
-    <meta name="title" content="AI Image Prompt Guides & Tutorials | REDDY FOR AI">
-    <meta name="description" content="Learn how to write AI image prompts, compare Gemini vs ChatGPT, and master prompt engineering techniques. Tutorials, guides, and a curated gallery of AI-generated artwork.">
-    <meta name="keywords" content="AI images, AI prompts, trending AI art, Midjourney prompts, Stable Diffusion prompts, AI image generation, prompt library, AI artwork, generative AI">
+
+    <title>REDDY FOR AI — Tools, Prompts & Experiments</title>
+    <meta name="title" content="REDDY FOR AI — Tools, Prompts & Experiments">
+    <meta name="description" content="Fun AI tools, curated image prompts, and creative experiments. Subscribe for weekly drops.">
     <meta name="author" content="REDDY FOR AI">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://reddyforai.com/">
-    
-    <!-- Open Graph / Facebook -->
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://reddyforai.com/">
-    <meta property="og:title" content="Discover Trending AI Images & Their Prompts | REDDY FOR AI">
-    <meta property="og:description" content="Discover trending AI images and their prompts. Explore curated AI-generated artwork with prompt templates for Midjourney, DALL-E, Stable Diffusion, and more.">
-    <meta property="og:image" content="https://reddyforai.com/og-image.jpg">
+    <meta property="og:title" content="REDDY FOR AI — Tools, Prompts & Experiments">
+    <meta property="og:description" content="Fun AI tools, curated image prompts, and creative experiments.">
     <meta property="og:site_name" content="REDDY FOR AI">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://reddyforai.com/">
-    <meta property="twitter:title" content="Discover Trending AI Images & Their Prompts | REDDY FOR AI">
-    <meta property="twitter:description" content="Discover trending AI images and their prompts. Explore curated AI-generated artwork with prompt templates for Midjourney, DALL-E, Stable Diffusion, and more.">
-    <meta property="twitter:image" content="https://reddyforai.com/twitter-image.jpg">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="auth-modal.css">
-    
-    <!-- Structured Data / Schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "REDDY FOR AI",
-      "url": "https://reddyforai.com/",
-      "description": "Discover trending AI images and their prompts. Curated AI-generated artwork and prompt templates.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "REDDY FOR AI",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://reddyforai.com/logo.png"
-        }
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://reddyforai.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Trending AI Images & Prompts",
-      "description": "Explore trending AI-generated images with their prompts for Gemini, ChatGPT, Midjourney, Nano Banana, Stable Diffusion, and other AI art generators",
-      "url": "https://reddyforai.com/",
-      "keywords": ["AI images", "AI prompts", "Gemini prompts", "ChatGPT prompts", "Midjourney prompts", "Nano Banana prompts", "Stable Diffusion prompts", "AI art"],
-      "about": {
-        "@type": "Thing",
-        "name": "AI Image Generation"
-      }
-    }
-    </script>
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/auth-modal.css">
 </head>
 <body>
-    <!-- Header with Integrated Navigation -->
+
     <header class="header" role="banner">
         <div class="container-full">
-            <a href="index.html" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <a href="/index.html" class="logo-link">
+                <span class="logo-mark"><img src="/favicon.png" alt="Reddy For AI"></span>
+                <h1 class="logo">Reddy For AI</h1>
+            </a>
             <nav class="navbar" role="navigation" aria-label="Main navigation">
                 <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" class="active">HOME</a></li>
-                    <li><a href="ai-image-prompts.html">EXPLORE</a></li>
-                    <li><a href="saved.html">SAVED</a></li>
-                    <li><a href="submit.html">SUBMIT</a></li>
-                    <li><a href="About.html">ABOUT</a></li>
+                    <li><a href="/index.html" class="active">Home</a></li>
+                    <li><a href="/ai-image-prompts.html">Explore</a></li>
+                    <li><a href="/saved.html">Saved</a></li>
+                    <li><a href="/submit.html">Submit</a></li>
+                    <li><a href="/About.html">About</a></li>
                 </ul>
+                <a href="/ai-image-prompts.html" class="nav-cta">Open Gallery</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content" role="main">
 
-        <!-- Hero Section -->
-        <section style="background:#012732; color:#e2e1dc; padding:80px 20px 70px; text-align:center;">
-            <div style="max-width:1200px; margin:0 auto;">
-                <span style="display:inline-block; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; border:1.5px solid rgba(226,225,220,0.4); padding:4px 14px; margin-bottom:24px; color:rgba(226,225,220,0.8);">AI Led Growth</span>
-                <h1 style="font-family:Staatliches,fantasy,sans-serif; font-size:clamp(48px,8vw,96px); font-weight:400; line-height:1; margin-bottom:22px; color:#e2e1dc;">For AN AI-Powered Future</h1>
-                <p style="font-size:17px; line-height:1.75; color:rgba(226,225,220,0.82); max-width:600px; margin:0 auto 36px;">Tutorials, prompt guides, model comparisons, and creative workflows — everything you need to create stunning AI-generated images.</p>
-                <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-                    <a href="/ai-image-prompts.html" style="display:inline-block; padding:14px 32px; background:#e2e1dc; color:#012732; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:opacity 0.2s;">Explore Gallery</a>
-                    <a href="#blog" style="display:inline-block; padding:14px 32px; border:1.5px solid rgba(226,225,220,0.6); color:#e2e1dc; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:opacity 0.2s;">Read Articles</a>
+        <section class="page-hero">
+            <h1 class="hero-title">Build cool things with AI.</h1>
+            <p class="hero-sub">Side projects, prompt libraries, and experiments - drop your email for weekly updates.</p>
+        </section>
+
+        <div class="signup-wrap">
+            <form id="newsletterForm" class="signup-box" autocomplete="email">
+                <input type="email" id="newsletterEmail" placeholder="you@email.com" required aria-label="Email address">
+                <button type="submit" id="newsletterBtn">Subscribe</button>
+            </form>
+            <p id="newsletterMessage" class="signup-msg"></p>
+        </div>
+
+        <!-- Tools row -->
+        <section class="section-block">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Tools</h2>
+                    <div class="section-rule" aria-hidden="true"></div>
+                </div>
+                <div class="square-grid">
+                    <a href="/ai-image-prompts.html" class="square-card">
+                        <span class="card-badge badge-hot">Hot</span>
+                        <span class="card-icon bg-pink">✦</span>
+                        <h3>AI Image Prompts</h3>
+                        <p>Browse trending prompts for Gemini, ChatGPT, Midjourney & more.</p>
+                        <span class="card-foot">Open →</span>
+                    </a>
+                    <a href="/ai-image-prompts/gemini" class="square-card">
+                        <span class="card-badge badge-new">New</span>
+                        <span class="card-icon bg-cyan">◈</span>
+                        <h3>Gemini Gallery</h3>
+                        <p>Prompts tuned for Google Gemini image generation.</p>
+                        <span class="card-foot">Open →</span>
+                    </a>
+                    <a href="/ai-image-prompts/chatgpt" class="square-card">
+                        <span class="card-icon bg-lime">◎</span>
+                        <h3>ChatGPT Gallery</h3>
+                        <p>Ready-to-copy prompts for ChatGPT image tools.</p>
+                        <span class="card-foot">Open →</span>
+                    </a>
+                    <div class="square-card is-empty" aria-hidden="true">
+                        <span class="card-icon bg-yellow">?</span>
+                        <h3>Coming soon</h3>
+                        <p>Next side project drops here.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Newsletter Strip -->
-        <section style="background:#f5f4ef; border-bottom:2px solid #012732; padding:24px 20px;">
-            <div style="max-width:700px; margin:0 auto; display:flex; align-items:center; gap:20px; flex-wrap:wrap; justify-content:center;">
-                <p style="font-size:13px; font-weight:600; letter-spacing:0.5px; color:#012732; text-transform:uppercase; flex-shrink:0;">Weekly AI Prompt Digest →</p>
-                <form id="newsletterForm" style="display:flex; gap:8px; flex:1; min-width:260px; max-width:480px;">
-                    <input type="email" id="newsletterEmail" placeholder="your@email.com" required
-                        style="flex:1; padding:11px 16px; border:2px solid #012732; background:#fff; font-size:13px; outline:none; font-family:Figtree,sans-serif;">
-                    <button type="submit" id="newsletterBtn"
-                        style="padding:11px 24px; background:#012732; color:#e2e1dc; border:none; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; cursor:pointer; font-family:Figtree,sans-serif;">Subscribe</button>
-                </form>
-                <p id="newsletterMessage" style="font-size:12px; color:#012732; opacity:0; transition:opacity 0.3s; width:100%; text-align:center; margin:0;"></p>
+        <!-- Blog / misc row -->
+        <section class="section-block">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Blog &amp; More</h2>
+                    <div class="section-rule" aria-hidden="true"></div>
+                </div>
+                <div class="square-grid">
+                    <a href="/About.html" class="square-card">
+                        <span class="card-badge badge-misc">About</span>
+                        <span class="card-icon bg-lavender">★</span>
+                        <h3>About Reddy</h3>
+                        <p>Who’s behind this site and what we’re building next.</p>
+                        <span class="card-foot">Read →</span>
+                    </a>
+                    <a href="/submit.html" class="square-card">
+                        <span class="card-icon bg-peach">↑</span>
+                        <h3>Submit a Prompt</h3>
+                        <p>Share your best AI image prompt with the community.</p>
+                        <span class="card-foot">Submit →</span>
+                    </a>
+                    <a href="/saved.html" class="square-card">
+                        <span class="card-badge badge-xp">Saved</span>
+                        <span class="card-icon bg-cyan">♥</span>
+                        <h3>Your Saved</h3>
+                        <p>Sign in with Google and keep prompts you love.</p>
+                        <span class="card-foot">Open →</span>
+                    </a>
+                    <a href="/contact.html" class="square-card">
+                        <span class="card-icon bg-yellow">✉</span>
+                        <h3>Say Hello</h3>
+                        <p>Ideas, collabs, or bugs — drop a note anytime.</p>
+                        <span class="card-foot">Contact →</span>
+                    </a>
+                </div>
             </div>
         </section>
-
-        <!-- Blog Grid -->
-        <section id="blog" class="container">
-            <div class="blog-section-header">
-                <span class="section-label">Latest Articles</span>
-               
-            </div>
-
-            <div class="blog-grid">
-
-                <!-- Article 1 -->
-                <a href="/blog/how-to-write-ai-image-prompts.html" class="blog-card">
-                    <div class="blog-card-image blog-card-image--gradient" style="background: linear-gradient(135deg, #012732 0%, #024a5c 100%); display: flex; align-items: center; justify-content: center;">
-                        <span class="blog-card-image-label">How to Write AI Image Prompts</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <span class="blog-card-tag">Beginner Guide</span>
-                        <h3 class="blog-card-title">How to Write Better AI Image Prompts</h3>
-                        <p class="blog-card-excerpt">Master the art of prompt engineering. From subject and style to lighting and composition — learn the building blocks that transform vague ideas into stunning AI-generated visuals.</p>
-                        <div class="blog-card-meta">
-                            <span>Feb 12, 2026</span>
-                            <span class="dot"></span>
-                            <span>8 min read</span>
-                        </div>
-                        <span class="blog-card-readmore">Read More →</span>
-                    </div>
-                </a>
-
-                <!-- Article 2 -->
-                <a href="/blog/gemini-vs-chatgpt-image-generation.html" class="blog-card">
-                    <div class="blog-card-image blog-card-image--gradient" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); display: flex; align-items: center; justify-content: center;">
-                        <span class="blog-card-image-label">Gemini vs ChatGPT</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <span class="blog-card-tag">Model Comparison</span>
-                        <h3 class="blog-card-title">Gemini vs ChatGPT: Which AI Creates Better Images?</h3>
-                        <p class="blog-card-excerpt">We ran 50 identical prompts through Gemini and ChatGPT. Here's what we found — which model wins on realism, creativity, prompt adherence, and speed.</p>
-                        <div class="blog-card-meta">
-                            <span>Feb 5, 2026</span>
-                            <span class="dot"></span>
-                            <span>11 min read</span>
-                        </div>
-                        <span class="blog-card-readmore">Read More →</span>
-                    </div>
-                </a>
-
-                <!-- Article 3 -->
-                <a href="/blog/10-prompt-techniques-for-stunning-ai-art.html" class="blog-card">
-                    <div class="blog-card-image blog-card-image--gradient" style="background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%); display: flex; align-items: center; justify-content: center;">
-                        <span class="blog-card-image-label">10 Prompt Techniques</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <span class="blog-card-tag">Techniques</span>
-                        <h3 class="blog-card-title">10 Essential Prompt Techniques for Stunning AI Art</h3>
-                        <p class="blog-card-excerpt">Style references, camera angles, lighting keywords, aspect ratios, and more. These 10 proven techniques will immediately level up every image you generate.</p>
-                        <div class="blog-card-meta">
-                            <span>Jan 28, 2026</span>
-                            <span class="dot"></span>
-                            <span>7 min read</span>
-                        </div>
-                        <span class="blog-card-readmore">Read More →</span>
-                    </div>
-                </a>
-
-                <!-- Article 4 -->
-                <a href="/blog/negative-prompts-guide.html" class="blog-card">
-                    <div class="blog-card-image blog-card-image--gradient" style="background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%); display: flex; align-items: center; justify-content: center;">
-                        <span class="blog-card-image-label">The Art of Negative Prompts</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <span class="blog-card-tag">Advanced</span>
-                        <h3 class="blog-card-title">The Art of Negative Prompts: What NOT to Say</h3>
-                        <p class="blog-card-excerpt">Negative prompts are your secret weapon against blurry hands, distorted faces, and cluttered backgrounds. Learn how to use them to get clean, precise results every time.</p>
-                        <div class="blog-card-meta">
-                            <span>Jan 20, 2026</span>
-                            <span class="dot"></span>
-                            <span>6 min read</span>
-                        </div>
-                        <span class="blog-card-readmore">Read More →</span>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="blog-view-all">
-                <a href="/ai-image-prompts.html">Browse All Articles →</a>
-            </div>
-        </section>
-
-        <!-- Feature Strips -->
-        <!-- <section style="border-top:2px solid #012732; border-bottom:2px solid #012732; background:#fff; overflow:hidden;">
-            <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); border-left:2px solid #012732;">
-                <div style="padding:44px 32px; border-right:2px solid #012732;">
-                    <p style="font-size:36px; margin-bottom:12px;">✦</p>
-                    <h3 style="font-family:Staatliches,fantasy,sans-serif; font-size:28px; font-weight:400; color:#012732; margin-bottom:10px;">Curated Prompts</h3>
-                    <p style="font-size:14px; color:#555; line-height:1.7;">Every prompt is hand-tested for quality. Browse hundreds of ready-to-use templates across all major AI models.</p>
-                </div>
-                <div style="padding:44px 32px; border-right:2px solid #012732;">
-                    <p style="font-size:36px; margin-bottom:12px;">◈</p>
-                    <h3 style="font-family:Staatliches,fantasy,sans-serif; font-size:28px; font-weight:400; color:#012732; margin-bottom:10px;">All AI Models</h3>
-                    <p style="font-size:14px; color:#555; line-height:1.7;">Prompts for Gemini, ChatGPT, Midjourney, Stable Diffusion, Nano Banana, and every major generator.</p>
-                </div>
-                <div style="padding:44px 32px;">
-                    <p style="font-size:36px; margin-bottom:12px;">⊕</p>
-                    <h3 style="font-family:Staatliches,fantasy,sans-serif; font-size:28px; font-weight:400; color:#012732; margin-bottom:10px;">Save & Revisit</h3>
-                    <p style="font-size:14px; color:#555; line-height:1.7;">Sign in with Google to save your favourite prompts and access them any time from your personal library.</p>
-                </div>
-            </div>
-        </section> -->
-        <style>
-            @media (max-width: 700px) {
-                section > div[style*="grid-template-columns:repeat(3,1fr)"] {
-                    grid-template-columns: 1fr !important;
-                }
-            }
-        </style>
 
     </main>
 
-    <!-- Newsletter Signup Section -->
-    <!-- <section style="max-width: 800px; margin: 60px auto; padding: 50px 40px; background: #012732; border: 2px solid #012732; text-align: center;">
-        <h2 style="font-size: 32px; margin-bottom: 15px; color: #e2e1dc; font-weight: 600; text-transform: uppercase;">Stay Updated</h2>
-        <p style="font-size: 16px; line-height: 1.6; color: #e2e1dc; margin-bottom: 30px; opacity: 0.9;">
-            Get weekly updates on the latest trending AI prompts delivered straight to your inbox
-        </p>
-        
-        <form id="newsletterForm" style="display: flex; gap: 10px; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
-            <input 
-                type="email" 
-                id="newsletterEmail" 
-                placeholder="Enter your email address" 
-                required
-                style="flex: 1; min-width: 250px; padding: 15px 20px; border: 2px solid #e2e1dc; background: #fff; font-size: 14px; border-radius: 4px; outline: none;"
-            >
-            <button 
-                type="submit" 
-                id="newsletterBtn"
-                style="padding: 15px 35px; background: #e2e1dc; color: #012732; border: none; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; border-radius: 4px;"
-            >
-                Subscribe
-            </button>
-        </form>
-        <p id="newsletterMessage" style="margin-top: 15px; font-size: 13px; color: #e2e1dc; opacity: 0; transition: opacity 0.3s;"></p>
-    </section> -->
-
-    <!-- Why Section -->
-    <!-- <section style="max-width: 1200px; margin: 0 auto 60px; padding: 50px 40px; background: #fff; border: 2px solid #012732;">
-        <article>
-            <h2 style="font-size: 32px; margin-bottom: 20px; color: #012732; text-align: center; font-weight: 600; text-transform: uppercase;">Why Choose Us?</h2>
-            <p style="font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 40px; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">
-                A curated collection of trending AI images and their prompts to help you discover and get inspiration for your next creation
-            </p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 40px;">
-                <div style="text-align: center; padding: 30px 20px; background: #f9f9f9; border: 1px solid #ddd; transition: transform 0.2s;">
-                    <div style="font-size: 48px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 20px; margin-bottom: 15px; color: #012732; font-weight: 600; text-transform: uppercase;">Curated</h3>
-                    <p style="font-size: 14px; color: #666; line-height: 1.7;">Every AI image prompt is carefully selected and tested for quality results</p>
-                </div>
-                <div style="text-align: center; padding: 30px 20px; background: #f9f9f9; border: 1px solid #ddd; transition: transform 0.2s;">
-                    <div style="font-size: 48px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 20px; margin-bottom: 15px; color: #012732; font-weight: 600; text-transform: uppercase;">All Models</h3>
-                    <p style="font-size: 14px; color: #666; line-height: 1.7;">Works with Gemini, ChatGPT, Midjourney, Nano Banana, Stable Diffusion, and more</p>
-                </div>
-                <div style="text-align: center; padding: 30px 20px; background: #f9f9f9; border: 1px solid #ddd; transition: transform 0.2s;">
-                    <div style="font-size: 48px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 20px; margin-bottom: 15px; color: #012732; font-weight: 600; text-transform: uppercase;">Consistent</h3>
-                    <p style="font-size: 14px; color: #666; line-height: 1.7;">Reliable, consistent results across all AI platforms</p>
-                </div>
-            </div>
-        </article>
-    </section> -->
-
-    <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-grid">
-                <!-- About Column -->
                 <div class="footer-column">
                     <h3 class="footer-heading">REDDY FOR AI</h3>
-                    <p class="footer-description">Your go-to library for trending AI image prompts. Discover, copy, and create stunning AI-generated artwork.</p>
+                    <p class="footer-description">Side projects, AI image prompts, and creative experiments — built for curiosity.</p>
                 </div>
-                
-                <!-- Quick Links Column -->
                 <div class="footer-column">
                     <h4 class="footer-heading">Quick Links</h4>
                     <ul class="footer-list">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="ai-image-prompts.html">AI Image Prompts</a></li>
-                        <li><a href="submit.html">Submit Prompt</a></li>
-                        <li><a href="About.html">About</a></li>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/ai-image-prompts.html">Explore</a></li>
+                        <li><a href="/submit.html">Submit</a></li>
+                        <li><a href="/About.html">About</a></li>
                     </ul>
                 </div>
-                
-                <!-- Legal Column -->
                 <div class="footer-column">
                     <h4 class="footer-heading">Legal</h4>
                     <ul class="footer-list">
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-of-service.html">Terms of Service</a></li>
-                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
-                <!-- Social & Contact Column -->
                 <div class="footer-column">
                     <h4 class="footer-heading">Connect</h4>
                     <div class="footer-social">
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
-                            <span class="social-icon">in</span> LinkedIn
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link">
-                            <span class="social-icon">𝕏</span> Twitter
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
-                            <span class="social-icon">ig</span> Instagram
-                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link"><span class="social-icon">in</span> LinkedIn</a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link"><span class="social-icon">𝕏</span> Twitter</a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link"><span class="social-icon">ig</span> Instagram</a>
                     </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>© 2026 REDDY FOR AI. All rights reserved. Made with AI for AI creators.</p>
-                <p style="font-size: 11px; opacity: 0.7; margin-top: 8px;">Empowering creativity through AI prompt engineering</p>
+                <p>© 2026 REDDY FOR AI. Made with curiosity.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <!-- Use canary for lock recovery fix (Navigator LockManager timeout) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@canary"></script>
-    <script src="auth.js"></script>
-    <script src="newsletter.js"></script>
+    <script src="/config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/newsletter.js"></script>
     <script>
-        // Hamburger menu functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const hamburger = document.getElementById('hamburgerBtn');
             const navLinks = document.getElementById('navLinks');
-            
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', function() {
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
+            if (!hamburger || !navLinks) return;
+            hamburger.addEventListener('click', function () {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
                 });
-                
-                // Close menu when clicking on a link
-                const links = navLinks.querySelectorAll('a');
-                links.forEach(link => {
-                    link.addEventListener('click', function() {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    });
-                });
-                
-                // Close menu when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    }
-                });
-            }
+            });
+            document.addEventListener('click', function (event) {
+                if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>

@@ -11,15 +11,28 @@
     <link rel="stylesheet" href="auth-modal.css">
     <style>
         .saved-page-section { display: none; }
-        .saved-page-section#saved-signin-section { max-width: 480px; margin: 40px auto; padding: 32px 24px; text-align: center; background: #fff; border: 2px solid #012732; }
-        .saved-page-section .saved-signin-title { font-size: 24px; color: #012732; margin-bottom: 12px; }
-        .saved-page-section .saved-signin-text { font-size: 15px; color: #333; margin-bottom: 24px; line-height: 1.5; }
-        .saved-google-btn { width: 100%; max-width: 280px; padding: 14px 20px; font-size: 16px; font-weight: 600; color: #333; background: #fff; border: 1px solid #dadce0; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 12px; }
-        .saved-google-btn:hover { background: #f8f9fa; }
+        .saved-page-section#saved-signin-section {
+            max-width: 480px;
+            margin: 40px auto;
+            padding: 32px 24px;
+            text-align: center;
+            background: #fff;
+            border: 4px solid #111;
+            border-radius: 16px;
+            box-shadow: 5px 5px 0 #111;
+        }
+        .saved-page-section .saved-signin-title { font-size: 24px; font-weight: 900; color: #111; margin-bottom: 12px; }
+        .saved-page-section .saved-signin-text { font-size: 15px; color: #444; margin-bottom: 24px; line-height: 1.5; font-weight: 500; }
+        .saved-google-btn {
+            width: 100%; max-width: 280px; padding: 14px 20px; font-size: 15px; font-weight: 800;
+            color: #111; background: #fff; border: 3px solid #111; border-radius: 12px; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            box-shadow: 4px 4px 0 #111;
+        }
+        .saved-google-btn:hover { background: #7FE8F0; transform: translate(2px, 2px); box-shadow: 2px 2px 0 #111; }
         .saved-empty { text-align: center; padding: 48px 20px; font-size: 16px; color: #666; grid-column: 1 / -1; }
-        #saved-error { display: none; text-align: center; color: #c00; margin-bottom: 16px; }
+        #saved-error { display: none; text-align: center; color: #c0123c; margin-bottom: 16px; font-weight: 700; }
         .saved-remove-btn { font-size: 12px; }
-        /* Grid layout for Saved page (no masonry) */
         .saved-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -28,21 +41,10 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-        .saved-grid .saved-grid-card {
-            break-inside: avoid;
-            page-break-inside: avoid;
-        }
-        .saved-grid .card-image-wrapper {
-            aspect-ratio: 4/5;
-            overflow: hidden;
-            background: #f0f0f0;
-        }
-        .saved-grid .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .saved-grid .saved-grid-card { break-inside: avoid; }
+        .saved-grid .card-image-wrapper { aspect-ratio: 4/5; overflow: hidden; background: #f0f0f0; }
+        .saved-grid .card-image { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-title { font-family: Figtree, system-ui, sans-serif !important; font-weight: 900 !important; }
         @media (max-width: 600px) {
             .saved-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
         }
@@ -54,7 +56,7 @@
 <body>
     <header class="header" role="banner">
         <div class="container-full">
-            <a href="/" class="logo-link"><h1 class="logo">REDDY FOR AI</h1></a>
+            <a href="/" class="logo-link"><span class="logo-mark">R</span><h1 class="logo">Reddy For AI</h1></a>
             <nav class="navbar" role="navigation" aria-label="Main navigation">
                 <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
                 <ul class="nav-links" id="navLinks">
@@ -80,7 +82,7 @@
 
     <main class="main-content" role="main">
         <div class="container-full">
-            <h1 class="gallery-title" style="text-align: center; margin: 40px 20px 20px; font-size: clamp(2rem, 8vw, 105px); font-family: fantasy;">Saved Prompts</h1>
+            <h1 class="gallery-title" style="text-align: center; margin: 40px 20px 20px; font-size: clamp(2rem, 8vw, 105px); font-family: Figtree, system-ui, sans-serif; font-weight: 900;">Saved Prompts</h1>
             <p style="text-align: center; max-width: 600px; margin: 0 auto 32px; font-size: 16px; color: #333;">Your collection of saved AI image prompts. Click a card to view details or remove to unsave.</p>
 
             <div id="saved-signin-section" class="saved-page-section">
