@@ -91,105 +91,34 @@ removeImageBtn.addEventListener('click', (e) => {
     previewImg.src = '';
 });
 
-// Upload to Cloudflare R2 using S3 API
-async function uploadToCloudflare(file) {
-    try {
-        console.log('=== UPLOAD STARTING ===');
-        console.log('File:', file.name, 'Size:', file.size, 'Type:', file.type);
-        
-        // Check if AWS SDK is loaded
-        if (typeof AWS === 'undefined') {
-            throw new Error('AWS SDK not loaded. Check if script tag is present.');
-        }
-        console.log('✓ AWS SDK loaded');
-        
-        // Generate unique filename
-        const timestamp = Date.now();
-        const fileName = `${timestamp}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-        console.log('Generated filename:', fileName);
-        
-        // Log configuration (without secrets)
-        console.log('R2 Config:', {
-            endpoint: cloudflareConfig.endpoint,
-            bucket: cloudflareConfig.bucketName,
-            region: cloudflareConfig.region,
-            publicUrl: cloudflareConfig.publicUrl,
-            hasAccessKey: !!cloudflareConfig.accessKeyId,
-            hasSecretKey: !!cloudflareConfig.secretAccessKey
-        });
-        
-        // Configure AWS SDK for Cloudflare R2
-        const s3 = new AWS.S3({
-            endpoint: cloudflareConfig.endpoint,
-            accessKeyId: cloudflareConfig.accessKeyId,
-            secretAccessKey: cloudflareConfig.secretAccessKey,
-            region: cloudflareConfig.region,
-            signatureVersion: 'v4',
-            s3ForcePathStyle: true
-        });
-        console.log('✓ S3 client configured');
-        
-        // Upload parameters
-        const uploadParams = {
-            Bucket: cloudflareConfig.bucketName,
-            Key: fileName,
-            Body: file,
-            ContentType: file.type,
-            ACL: 'public-read' // Make file publicly accessible
-        };
-        
-        console.log('Starting S3 upload...');
-        
-        // Perform upload using putObject (wrapped in Promise)
-        const result = await new Promise((resolve, reject) => {
-            s3.putObject(uploadParams, (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve({
-                        ...data,
-                        Location: `${cloudflareConfig.publicUrl}/${fileName}`,
-                        Key: fileName,
-                        Bucket: cloudflareConfig.bucketName
-                    });
-                }
-            });
-        });
-        
-        console.log('✓✓✓ UPLOAD SUCCESSFUL ✓✓✓');
-        console.log('Result:', result);
-        
-        // Return the public URL
-        const baseUrl = cloudflareConfig.publicUrl || `${cloudflareConfig.endpoint}/${cloudflareConfig.bucketName}`;
-        const finalUrl = `${baseUrl}/${fileName}`;
-        console.log('Final URL:', finalUrl);
-        
-        return finalUrl;
-        
-    } catch (error) {
-        console.error('❌❌❌ UPLOAD FAILED ❌❌❌');
-        console.error('Error name:', error.name);
-        console.error('Error message:', error.message);
-        console.error('Error code:', error.code);
-        console.error('Full error:', error);
-        
-        // Show error to user
-        let errorMessage = 'Failed to upload image';
-        
-        if (error.message.includes('AWS SDK not loaded')) {
-            errorMessage = 'AWS SDK not loaded. Please refresh the page.';
-        } else if (error.code === 'NetworkingError') {
-            errorMessage = 'Network error. Check your internet connection and CORS settings.';
-        } else if (error.code === 'InvalidAccessKeyId') {
-            errorMessage = 'Invalid R2 access key. Check config.js credentials.';
-        } else if (error.code === 'SignatureDoesNotMatch') {
-            errorMessage = 'Invalid R2 secret key. Check config.js credentials.';
-        } else if (error.message) {
-            errorMessage = `Upload failed: ${error.message}`;
-        }
-        
-        throw new Error(errorMessage);
+// Upload image to Supabase Storage
+async function uploadImage(file) {
+    if (!supabaseClient) {
+        throw new Error('Supabase client not initialized.');
     }
+
+    const bucket = (typeof supabaseConfig !== 'undefined' && supabaseConfig.storageBucket)
+        ? supabaseConfig.storageBucket
+        : 'prompt-images';
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
+
+    const { error } = await supabaseClient.storage
+        .from(bucket)
+        .upload(fileName, file, {
+            contentType: file.type || 'image/jpeg',
+            upsert: false
+        });
+
+    if (error) {
+        throw new Error(error.message || 'Failed to upload image');
+    }
+
+    const { data } = supabaseClient.storage.from(bucket).getPublicUrl(fileName);
+    if (!data || !data.publicUrl) {
+        throw new Error('Upload succeeded but public URL was not returned.');
+    }
+    return data.publicUrl;
 }
 
 // Form submission handler
@@ -216,18 +145,12 @@ form.addEventListener('submit', async (e) => {
         };
         
         // Upload image if selected
-        let imageUrl = null;
         if (selectedFile) {
             try {
-                console.log('📤 Uploading image to Cloudflare R2...');
-                imageUrl = await uploadToCloudflare(selectedFile);
-                formData.image_url = imageUrl;
-                console.log('✓ Image uploaded successfully:', imageUrl);
+                formData.image_url = await uploadImage(selectedFile);
             } catch (error) {
-                console.error('❌ Image upload failed:', error);
-                // For now, continue without image instead of blocking submission
+                console.error('Image upload failed:', error);
                 showNotification('Warning: Image upload failed. Submitting without image.', 'error');
-                // Don't throw - allow submission to continue
             }
         }
         
